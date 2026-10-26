@@ -13,18 +13,19 @@ Atualizado em 2026-10-26.
 - Schemas iniciais de organizações e papéis de membros adicionados.
 - Helper de política de acesso com testes para negar acesso cruzado entre organizações; não integrado à autenticação, banco ou rotas.
 - Schemas iniciais de cadastro e resposta pública de usuário adicionados, com testes de normalização, validação e rejeição de campos extras.
-- Notebook principal `docs/NEXORA-NOTEBOOK.md`, documentação de usuários `docs/CORE-USERS.md` e proposta de persistência `docs/ADR-0002-PERSISTENCE.md` publicados.
+- ADR-0002 documenta proposta de persistência PostgreSQL/Prisma, pendente de confirmação do ambiente.
+- ADR-0003 documenta a proposta de autenticação baseada em sessões, ainda não implementada.
+- Notebook principal `docs/NEXORA-NOTEBOOK.md` e documentação de usuários `docs/CORE-USERS.md` publicados.
 
 ## Alterações recentes
 
 - `a1071af`: atualização de dependências diretas Zod e Vitest.
 - `b363a1e`: auditoria de dependências adicionada ao pipeline CI.
 - `e01bf4c`, `0db7893`, `2a46cc2`: schemas, helper de acesso e testes de organizações.
-- `61d00d7`: notebook principal publicado.
-- `8b5ded0`: proposta de persistência documentada.
 - `504587d`, `512ab09`, `f9b690f`: schemas de usuário, testes e documentação.
-- `39989e7`: README atualizado.
-- `b6a1951`: roadmap atualizado.
+- `892dfda`: proposta de autenticação e sessões documentada.
+- `b2787bf`: README atualizado com link da estratégia de autenticação.
+- `87f7a4f`: roadmap atualizado.
 
 ## Verificações e ressalvas
 
