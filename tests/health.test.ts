@@ -44,4 +44,22 @@ describe("API foundation", () => {
     });
     expect(response.body).not.toContain("sensitive internal detail");
   });
+
+  it("does not expose raw client error messages in 4xx responses", async () => {
+    process.env.NODE_ENV = "test";
+    app = await createApp();
+    app.get("/__test/client-error", async () => {
+      const error = new Error("secret validation details") as Error & { statusCode: number };
+      error.statusCode = 400;
+      throw error;
+    });
+
+    const response = await app.inject({ method: "GET", url: "/__test/client-error" });
+    expect(response.statusCode).toBe(400);
+    expect(response.json()).toEqual({
+      error: "REQUEST_ERROR",
+      message: "Não foi possível processar a requisição",
+    });
+    expect(response.body).not.toContain("secret validation details");
+  });
 });
