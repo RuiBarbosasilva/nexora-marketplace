@@ -7,6 +7,7 @@
 - [x] Definir validação automatizada por GitHub Actions.
 - [x] Publicar notebook principal e registrar próximos passos.
 - [x] Documentar proposta inicial de persistência (ADR; decisão ainda depende de confirmação de ambiente).
+- [x] Documentar proposta de autenticação e requisitos de sessão (ADR; ainda não implementada).
 - [ ] Adicionar e versionar lockfile de dependências após validar a instalação limpa.
 - [ ] Definir política de branches e revisão protegida.
 - [ ] Validar nome, marca, domínio e requisitos legais.
