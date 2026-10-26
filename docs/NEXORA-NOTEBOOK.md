@@ -152,3 +152,11 @@ Na branch remota `feat/core-foundation`, `package.json` ainda não declara `pris
 O workflow CI atual valida auditoria, TypeScript, testes e build, mas não valida schema nem conexão de banco. O PostgreSQL local está ativo, mas `DATABASE_URL` não foi configurada e a autenticação `postgres` falhou. Não foram executadas migrações nem alterados bancos.
 
 Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lockfile no branch, confirmar dependências alinhadas com Prisma 6.19.3, então configurar uma credencial de desenvolvimento autorizada e validar o schema antes de criar migrações.
+
+## Continuação de desenvolvimento — serviço de organizações
+
+- Commit `ffbaa15`: criado `src/modules/core/organization.service.ts`, uma camada de serviço com porta de persistência injetável para criação de organizações.
+- O serviço valida a identidade autenticada separadamente do payload, valida os dados com o schema existente, rejeita slug já utilizado e delega a criação da organização + associação OWNER a uma operação de repositório que deve ser transacional.
+- Commit `7d90912`: adicionados testes unitários do serviço para criação, identidade inválida, payload inválido, slug duplicado e corrida de unicidade reportada pela persistência.
+- Limite explícito: ainda não há adaptador PostgreSQL/Prisma nem rota HTTP ligada a este serviço; o teste usa repositório falso e não comprova persistência real. O adaptador deve aplicar constraint UNIQUE no slug e criar organização + associação OWNER na mesma transação.
+- Validação remota pendente: os commits foram publicados diretamente na branch `feat/core-foundation`; consultar o novo resultado do GitHub Actions antes de considerar check/test/build aprovados.
