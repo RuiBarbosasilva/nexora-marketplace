@@ -8,6 +8,9 @@
 - A pure access-policy helper denies access when membership is missing, inactive, tied to another user, or belongs to another organization.
 - Unit tests cover accepted input, malformed input, unexpected properties, inactive membership, role restrictions and cross-organization access.
 
+- Membership input tests also verify UUID format, role allowlisting and rejection of unexpected fields.
+- The access helper's documentation now accurately describes `allowedRoles` as an allowlist, not a role hierarchy; it does not infer that OWNER outranks ADMIN.
+
 ## Important boundaries
 
 This is domain validation and a policy helper, not a complete authentication or authorization system. It does not authenticate a user, load membership from a database, persist organizations, manage sessions, or protect routes automatically. A future route must obtain the authenticated identity from a trusted authentication layer and retrieve current membership from persistent storage before calling the policy.
