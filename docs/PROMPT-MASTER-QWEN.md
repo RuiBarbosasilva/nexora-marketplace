@@ -295,3 +295,30 @@ Comece agora:
 6. Continue para a persistência e identidade conforme as fases, sem fingir sucesso onde o ambiente não permite validar.
 
 O objetivo não é apenas gerar uma arquitetura bonita: é transformar gradualmente o repositório existente em software funcional, testado, seguro e documentado.
+
+
+## 14. REGRA ESPECÍFICA PARA DESTRAVAR PRISMA/POSTGRESQL
+
+O usuário reportou dificuldade da Qwen ao criar Prisma. Não invente a causa e não repita comandos aleatórios. Primeiro obtenha o erro exato, o comando que falhou e a versão instalada com `npx prisma -v`; não leia nem imprima o conteúdo de `.env`.
+
+Use o guia do repositório: `docs/PRISMA-POSTGRESQL-TROUBLESHOOTING.md`.
+
+Antes de editar, verifique:
+- `git status --short --branch` e preserve toda alteração local;
+- `npm ls prisma @prisma/client @prisma/adapter-pg pg`;
+- versões exatas de CLI, Client e adapter, e scripts em `package.json`;
+- presença real de `prisma/schema.prisma`, `prisma.config.ts` ou `prisma7.config.ts`, e de migrações existentes.
+
+Não misture sintaxe de Prisma ORM 6 e 7. Se escolher Prisma ORM 7, siga a documentação da major instalada: o datasource do schema normalmente declara apenas o provider; a URL fica na configuração do Prisma; o generator usa `provider = "prisma-client"` com `output` explícito; o cliente gerado deve ser importado pelo caminho desse output e o PostgreSQL usa o driver adapter compatível. Confirme os detalhes na documentação oficial correspondente à versão instalada antes de gerar arquivos.
+
+Procedimento:
+1. Instalar dependências compatíveis sem `--force` e sincronizar lockfile.
+2. Escrever um schema mínimo coerente com os contratos existentes de usuário, organização e associação.
+3. Executar `npx prisma -v`, `npx prisma validate`, `npx prisma format` e `npx prisma generate`.
+4. Executar `prisma migrate dev` somente se uma base PostgreSQL de desenvolvimento estiver disponível; nunca usar produção para isso.
+5. Integrar o cliente numa camada única de infraestrutura e testar desligamento limpo.
+6. Adicionar testes de integração reais para unicidade, relações e persistência. Se o banco não estiver disponível, reportar explicitamente que esses testes não foram executados.
+7. Rodar typecheck, testes, build, audit e `git diff --check`; corrigir erros antes de seguir.
+8. Atualizar notebook e status com versões, comandos e resultados observados.
+
+Nunca use `migrate reset`, apague migrations/bancos, exponha URLs/segredos, nem declare banco ou migrações validados sem evidência. Se o erro exigir informação que não foi fornecida, implemente tarefas independentes seguras e peça apenas a saída sanitizada do comando que falhou.
