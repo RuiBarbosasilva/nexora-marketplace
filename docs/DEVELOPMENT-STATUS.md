@@ -56,3 +56,22 @@ A atualização de Zod e Vitest precisa ser confirmada com instalação limpa, l
 ## Limite do produto atual
 
 NEXORA ainda é apenas a fundação técnica da API. Não existem autenticação funcional, banco de dados de negócio, lojas, produtos, pedidos, pagamentos, logística, afiliados operacionais ou SENTINEL implementados. Não está pronto para produção.
+
+
+## Atualização local reportada em 2026-10-26 — não confundir com CI
+
+O usuário executou localmente, em Windows com Node.js 22.23.1/npm 10.9.8:
+- TypeScript check: aprovado.
+- Build: aprovado com limpeza de `dist` antes da compilação.
+- Testes: 2 testes-fonte aprovados; `vitest.config.ts` exclui `dist/**`.
+- Auditoria npm: zero vulnerabilidades após atualização de Vitest para `5.0.5` e Zod para `4.6.7`.
+
+Essas alterações foram feitas localmente e ainda não há evidência de que todos os arquivos correspondentes tenham sido sincronizados com este branch remoto. O lockfile local e a configuração Vitest devem ser revisados antes de qualquer sincronização. Backups locais permanecem no computador do usuário e não devem ser removidos.
+
+## Bloqueio de implementação Prisma
+
+A Qwen relata dificuldade para criar/configurar Prisma. A mensagem de erro específica não foi fornecida; portanto, a causa ainda não está confirmada. No exame remoto mais recente, `prisma/schema.prisma` e `prisma.config.ts` não estavam presentes.
+
+Foi adicionado o guia `docs/PRISMA-POSTGRESQL-TROUBLESHOOTING.md` com orientações para não misturar Prisma ORM 6 e 7, alinhar as versões de CLI/Client/adapter, configurar `DATABASE_URL` sem versionar segredos, validar schema e executar migrações apenas em banco de desenvolvimento.
+
+**Próximo gate técnico:** obter a saída sanitizada do comando que falha e de `npx prisma -v`; confirmar versão e arquivos reais; executar `prisma validate` e `prisma generate`; aplicar migração e testes de integração somente quando houver PostgreSQL disponível. Não marcar persistência como concluída até haver evidências reais.
