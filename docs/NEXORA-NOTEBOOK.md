@@ -203,3 +203,9 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 ### Evidência do runner GitHub Actions — 2026-10-26
 
 A execução 87 foi inspecionada diretamente: job `validate`, `runner_id: 0`, `runner_name` vazio e `steps: []`, concluído em aproximadamente dois segundos. A falha acontece antes de executar os comandos do workflow; não atribuir aos testes nem ao código da aplicação. Consultar a configuração/estado do GitHub Actions e a disponibilidade de runner hospedado. Essa configuração não é corrigível apenas alterando arquivos de aplicação. Detalhes em `docs/CI-DIAGNOSTIC.md`.
+
+## Testes adicionais de isolamento de organizações — 2026-10-26
+
+- Commit `a8f56c6`: criado `tests/organization-access.test.ts` com cobertura para associação ausente/inativa, usuário divergente, organização divergente, allowlist de papéis e allowlist vazia.
+- Os testes foram publicados no branch `feat/core-foundation`; não foram executados nesta sessão. A execução válida depende de CI com runner atribuído ou validação local.
+- O helper continua sendo uma política pura: não substitui autenticação, consulta de associação persistida, nem autorização integrada às rotas.
