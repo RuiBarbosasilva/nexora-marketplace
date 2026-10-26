@@ -55,6 +55,7 @@ Verifique a API em `http://127.0.0.1:3000/api/health`.
 
 - [Notebook principal do projeto](docs/NEXORA-NOTEBOOK.md)
 - [Status de desenvolvimento e validações pendentes](docs/DEVELOPMENT-STATUS.md)
+- [Contratos iniciais de usuário](docs/CORE-USERS.md)
 - [Organizações e isolamento entre vendedores](docs/CORE-ORGANIZATIONS.md)
 - [Arquitetura](docs/ARCHITECTURE.md)
 - [Modelo de ameaças](docs/THREAT-MODEL.md)
