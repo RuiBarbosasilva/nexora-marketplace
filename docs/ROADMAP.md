@@ -5,13 +5,15 @@
 - [x] Estabelecer documentação inicial.
 - [x] Definir stack inicial, arquitetura executável e padrão de testes.
 - [x] Definir validação automatizada por GitHub Actions.
+- [x] Publicar notebook principal e registrar próximos passos.
+- [x] Documentar proposta inicial de persistência (ADR; decisão ainda depende de confirmação de ambiente).
 - [ ] Adicionar e versionar lockfile de dependências após validar a instalação limpa.
 - [ ] Definir política de branches e revisão protegida.
 - [ ] Validar nome, marca, domínio e requisitos legais.
 - [ ] Confirmar CI verde com auditoria de dependências.
 
 ## Fase 1 — MVP comercial
-- [ ] Definir modelo de dados e persistência.
+- [ ] Confirmar a decisão de persistência e implementar banco/migrações.
 - [ ] Autenticação, sessões e perfis de usuário.
 - [x] Schemas iniciais de organização e papéis de membro (sem persistência).
 - [x] Helper de política de acesso por organização com testes de isolamento.
