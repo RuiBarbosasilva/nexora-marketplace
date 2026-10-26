@@ -53,6 +53,7 @@ Verifique a API em `http://127.0.0.1:3000/api/health`.
 
 ## Documentação
 
+- [Status de desenvolvimento e validações pendentes](docs/DEVELOPMENT-STATUS.md)
 - [Arquitetura](docs/ARCHITECTURE.md)
 - [Modelo de ameaças](docs/THREAT-MODEL.md)
 - [Roadmap](docs/ROADMAP.md)
