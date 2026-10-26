@@ -1,19 +1,23 @@
-﻿# Roadmap do NEXORA
+# Roadmap do NEXORA
 
 ## Fase 0 — Fundação
 - [x] Criar repositório GitHub.
 - [x] Estabelecer documentação inicial.
-- [ ] Definir stack, arquitetura executável e padrão de testes.
-- [ ] Definir política de branches, revisão e CI.
+- [x] Definir stack inicial, arquitetura executável e padrão de testes.
+- [x] Definir validação automatizada por GitHub Actions.
+- [ ] Adicionar e versionar lockfile de dependências após validar a instalação limpa.
+- [ ] Definir política de branches e revisão protegida.
 - [ ] Validar nome, marca, domínio e requisitos legais.
+- [ ] Confirmar CI verde com auditoria de dependências.
 
 ## Fase 1 — MVP comercial
-- [ ] Autenticação, perfis e organizações.
+- [ ] Definir modelo de dados e persistência.
+- [ ] Autenticação, perfis, organizações e autorização por organização.
 - [ ] Cadastro de lojas e produtos.
-- [ ] Catálogo e fluxo de pedidos.
+- [ ] Catálogo, carrinho e fluxo de pedidos.
 - [ ] Integração com provedor de pagamentos escolhido.
 - [ ] Webhooks idempotentes e conciliação.
-- [ ] Links de afiliados e atribuição auditável.
+- [ ] Links de afiliados e atribuição auditável vinculada a vendas válidas.
 - [ ] Cálculo de taxas, custos e margem por pedido.
 - [ ] Testes automatizados e isolamento entre lojas.
 
