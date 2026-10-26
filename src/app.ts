@@ -9,7 +9,8 @@ export async function createApp(): Promise<FastifyInstance> {
     requestTimeout: 10_000,
   });
 
-  await app.register(helmet, { contentSecurityPolicy: false });
+  // Keep Helmet's default security headers, including its default CSP.
+  await app.register(helmet);
 
   app.get("/api/health", async () => ({
     status: "ok",
