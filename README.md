@@ -1,12 +1,16 @@
-﻿# NEXORA
+# NEXORA
 
 **Comércio inteligente. Crescimento compartilhado.**
 
 NEXORA é uma plataforma em desenvolvimento para conectar vendedores, fabricantes, compradores e afiliados, com foco em transparência comercial, eficiência operacional e crescimento sustentável.
 
+## Estado atual
+
+A fundação documental foi publicada na branch `main`. A branch `feat/core-foundation` adiciona um scaffold inicial da API Node.js/TypeScript, endpoint de saúde, testes e validação automatizada. Essa base ainda não é um marketplace funcional nem está pronta para produção.
+
 ## Visão do produto
 
-Construir uma infraestrutura de comércio digital que ajude pequenos vendedores e fabricantes a vender online, administrar pedidos, acompanhar a rentabilidade e desenvolver canais de aquisição.
+Ajudar pequenos vendedores e fabricantes a vender online, administrar pedidos, acompanhar rentabilidade e desenvolver canais de aquisição.
 
 ## Domínios planejados
 
@@ -21,15 +25,31 @@ Construir uma infraestrutura de comércio digital que ajude pequenos vendedores 
 - **Profit:** custos, taxas, margens e rentabilidade por pedido.
 - **NEXORA SENTINEL:** monitoramento de ameaças, detecção de anomalias e alertas de segurança.
 
-## Princípios
+## Stack inicial
 
-1. Transparência nas taxas, comissões e regras comerciais.
-2. Comissões de afiliados vinculadas a vendas legítimas, nunca ao recrutamento.
-3. Proteção de dados e privacidade desde a concepção.
-4. Segurança em camadas, auditoria e privilégios mínimos.
-5. Decisões financeiras sensíveis sujeitas a controles e revisão apropriados.
-6. Evolução incremental, com testes e critérios de aceitação.
-7. Integrações com pagamentos e logística por provedores autorizados.
+- Node.js 22+
+- TypeScript em modo estrito
+- Fastify
+- Zod
+- Vitest
+- GitHub Actions para checagem, testes e build
+
+Ver [ADR da stack](docs/ADR-0001-TECH-STACK.md).
+
+## Executar localmente
+
+Requisitos: Node.js 22+ e npm.
+
+```powershell
+npm install
+Copy-Item .env.example .env
+npm run check
+npm test
+npm run build
+npm run dev
+```
+
+Verifique a API em `http://127.0.0.1:3000/api/health`.
 
 ## Documentação
 
@@ -39,14 +59,20 @@ Construir uma infraestrutura de comércio digital que ajude pequenos vendedores 
 - [Resposta a incidentes](docs/INCIDENT-RESPONSE.md)
 - [Política de segurança](SECURITY.md)
 
-## Estado atual
+## Princípios
 
-Este repositório está na fase inicial de documentação e estruturação. A existência desta documentação não significa que funcionalidades, integrações, monitoramento contínuo ou controles de produção já estejam implementados.
+1. Transparência nas taxas, comissões e regras comerciais.
+2. Comissões de afiliados vinculadas a vendas legítimas, nunca ao recrutamento.
+3. Proteção de dados e privacidade desde a concepção.
+4. Segurança em camadas, auditoria e privilégios mínimos.
+5. Decisões financeiras sensíveis sujeitas a controles e revisão apropriados.
+6. Evolução incremental, com testes e critérios de aceitação.
+7. Integrações com pagamentos e logística por provedores adequados.
 
 ## Limites do MVP
 
-A primeira versão deve priorizar lojas de vendedores, catálogo, pedidos, links de afiliados, cálculo de rentabilidade e integrações selecionadas de pagamento e logística. Recursos adicionais serão incorporados após validação técnica, comercial, operacional e jurídica.
+Priorizar lojas de vendedores, catálogo, pedidos, links de afiliados, cálculo de rentabilidade e integrações selecionadas de pagamento e logística. Expandir após validação técnica, comercial, operacional e jurídica.
 
 ## Aviso
 
-As integrações financeiras, obrigações fiscais, proteção de dados, regras de consumo, logística e modelo de comissões deverão ser validados com profissionais competentes antes do lançamento comercial.
+Integrações financeiras, obrigações fiscais, proteção de dados, regras de consumo, logística e modelo de comissões deverão ser validados com profissionais competentes antes do lançamento comercial. Nunca commitar segredos, tokens ou dados pessoais.
