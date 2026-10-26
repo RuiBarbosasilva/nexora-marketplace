@@ -199,3 +199,7 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 - A branch remota consultada não contém `package-lock.json` nem `vitest.config.ts`. Revisar arquivos locais e diffs antes de sincronizar, sem apagar backups.
 - Não foi feita alteração de banco de dados nem criada migração nesta etapa. A configuração Prisma local reportada não está comprovadamente sincronizada com o branch remoto.
 - Próximo gate: obter execução/logs utilizáveis do CI e resolver a causa real; depois sincronizar configuração e lockfile revisados. Só então avançar para persistência real e migrações.
+
+### Evidência do runner GitHub Actions — 2026-10-26
+
+A execução 87 foi inspecionada diretamente: job `validate`, `runner_id: 0`, `runner_name` vazio e `steps: []`, concluído em aproximadamente dois segundos. A falha acontece antes de executar os comandos do workflow; não atribuir aos testes nem ao código da aplicação. Consultar a configuração/estado do GitHub Actions e a disponibilidade de runner hospedado. Essa configuração não é corrigível apenas alterando arquivos de aplicação. Detalhes em `docs/CI-DIAGNOSTIC.md`.
