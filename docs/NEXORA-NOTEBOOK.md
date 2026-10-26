@@ -171,3 +171,13 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 - Publicação feita na branch `feat/core-foundation`; os arquivos e testes foram enviados ao GitHub. A execução de CI deste commit ainda deve ser consultada antes de declarar os testes aprovados.
 - **Limites:** armazenamento apenas em memória; não há integração automática com handlers HTTP, autenticação, autorização ou webhooks; não há alertas externos nem auditoria persistente. Não é uma implementação pronta para produção.
 - Próxima etapa: consultar o CI e integrar eventos aos pontos reais de falha sem armazenar dados sensíveis; depois definir armazenamento append-only e acesso administrativo protegido.
+
+
+## SENTINEL — integração inicial com o handler HTTP (2026-10-26)
+
+- O buffer de eventos agora é exportado como singleton de processo limitado a 1.000 entradas.
+- `src/app.ts` registra eventos `INPUT_REJECTED` para erros 4xx lançados por handlers e `UNEXPECTED_ERROR` para erros 5xx, incluindo apenas o ID da requisição e a origem HTTP.
+- A gravação do SENTINEL fica protegida por tratamento de falha para que um erro do monitor não impeça a resposta HTTP sanitizada.
+- Criado `tests/sentinel-http.test.ts` para verificar que erros 4xx/5xx geram eventos e que detalhes internos continuam fora da resposta.
+- CI observado após os commits retornou `failure` com `steps: []`; não há evidência de que a execução tenha iniciado as etapas de instalação/check/test/build. A causa operacional do CI permanece por investigar. Portanto, não declarar os testes aprovados.
+- Limites permanecem: memória volátil, sem endpoint de consulta, sem persistência durável e sem integração automática de eventos de autenticação, autorização ou webhooks.
