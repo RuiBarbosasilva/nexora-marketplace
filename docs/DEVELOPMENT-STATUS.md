@@ -97,3 +97,12 @@ Evidências informadas pelo usuário no Windows:
 3. Confirmar se o schema Prisma, dependências e infraestrutura estão versionados no branch; o cliente gerado localmente não comprova que o Prisma esteja configurado no GitHub.
 4. Executar prisma validate e prisma generate; depois criar/aplicar migração inicial somente no banco de desenvolvimento confirmado.
 5. Rodar type check, testes, build e CI e registrar resultados reais.
+## GitHub reconciliation — 2026-10-26
+
+Uma leitura direta do branch remoto `feat/core-foundation` confirmou que `package.json` não declara `prisma` nem `@prisma/client`, e os caminhos `prisma/schema.prisma`, `src/infrastructure/database/prisma.ts` e `tests/infrastructure/database.test.ts` retornam 404 no GitHub. Isso diverge do estado local reportado, no qual esses arquivos existem e `prisma generate` foi executado.
+
+Consequência: a configuração Prisma local ainda não está sincronizada com o branch remoto. Não foi criado schema remoto por inferência, porque isso poderia sobrescrever ou divergir dos modelos locais. Antes de sincronizar, revisar os arquivos locais e o diff, manter backups e incluir dependências/lockfile coerentes.
+
+O CI remoto atual executa npm install, npm audit, check, testes e build, mas não valida Prisma; o package.json remoto consultado não tem scripts de banco. O CI ainda não comprova persistência.
+
+Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário PostgreSQL postgres recusada. Nenhum banco/migração foi criado ou alterado.
