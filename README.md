@@ -34,7 +34,7 @@ Ajudar pequenos vendedores e fabricantes a vender online, administrar pedidos, a
 - Vitest
 - GitHub Actions para checagem, testes e build
 
-Ver [ADR da stack](docs/ADR-0001-TECH-STACK.md) e [proposta de persistência](docs/ADR-0002-PERSISTENCE.md).
+Ver [ADR da stack](docs/ADR-0001-TECH-STACK.md), [proposta de persistência](docs/ADR-0002-PERSISTENCE.md) e [proposta de autenticação](docs/ADR-0003-AUTHENTICATION.md).
 
 ## Executar localmente
 
