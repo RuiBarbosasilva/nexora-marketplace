@@ -27,6 +27,12 @@ Atualizado em 2026-10-26.
 - `b2787bf`: README atualizado com link da estratégia de autenticação.
 - `87f7a4f`: roadmap atualizado.
 
+## Endurecimento HTTP recente
+
+- O handler de erros padroniza respostas 4xx e 5xx sem devolver a mensagem bruta da exceção.
+- A política CSP padrão do Helmet está habilitada.
+- Existe um teste dedicado para verificar cabeçalhos HTTP básicos; sua execução ainda precisa ser confirmada pelo CI.
+
 ## Verificações e ressalvas
 
 Os testes novos foram publicados no GitHub, mas não foram executados neste ambiente de trabalho remoto. A última execução local conhecida confirmou type check, testes e build antes das últimas mudanças de dependências e dos testes de organização. Ainda não há evidência verificada nesta sessão de CI verde para o commit mais recente.
