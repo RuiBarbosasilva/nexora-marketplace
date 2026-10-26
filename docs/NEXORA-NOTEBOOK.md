@@ -37,7 +37,9 @@ Marketplace para pequenos vendedores e fabricantes, com lojas próprias, catálo
 - Dependências diretas Zod e Vitest atualizadas; falta confirmar a árvore resolvida com lockfile e CI.
 - Schemas de organização: tipos `SELLER`, `MANUFACTURER`, `HYBRID`; status; slug; papéis `OWNER`, `ADMIN`, `MANAGER`, `MEMBER`, `VIEWER`.
 - Helper de política de acesso e testes para rejeitar acesso cruzado entre organizações, usuário divergente, associação inativa e papel insuficiente.
-- Documentação de arquitetura, threat model, resposta a incidentes, roadmap, ADR da stack, estado de desenvolvimento e regras de organizações.
+- Schemas iniciais de cadastro de usuário e de resposta pública; e-mail normalizado, nome validado, senha com tamanho mínimo/máximo e rejeição de propriedades extras.
+- Testes para os contratos de usuário; ainda aguardam execução automatizada confirmada.
+- Documentação de arquitetura, threat model, resposta a incidentes, roadmap, ADRs, estado de desenvolvimento, usuários e organizações.
 
 ## Commits de referência
 
@@ -48,15 +50,19 @@ Marketplace para pequenos vendedores e fabricantes, com lojas próprias, catálo
 - `e01bf4c3db69b5e5ce86c4012b4b3b1dee3687a0` — schemas de organização.
 - `0db7893edbe10bbedbded847ee0b44e21abc3c2a` — helper de acesso.
 - `2a46cc2a679c35544535b9c8997663946f2fa114` — testes da política de acesso.
-- `d06bdf58783bc0f714d0e9b536b02581402a95df` — documentação de organizações.
-- `6d4d1cde460f77808d58f9e082398c555d9be297` — estado de desenvolvimento.
+- `61d00d74059ec39db1f807d741fcc61fa10fd30a` — notebook principal publicado.
+- `8b5ded0c626d275ab66feb02e5040f3976357db3` — proposta de persistência documentada.
+- `504587d098d4f9d5d0f86ba5e7eba2889baa39e6` — schemas de usuário.
+- `512ab0960ed99acfc2b04ef8c9da831488e74b3c` — testes dos schemas de usuário.
+- `f9b690f2ab3240581183afdc181d0a9adc82c082` — documentação de usuários.
+- `9c824b7686aedaff3509c415aa62f89a6ca146e1` — atualização do status.
 
 ## Pendências prioritárias
 
 1. Verificar o resultado real do GitHub Actions no branch e corrigir falhas.
 2. Atualizar a cópia local com cuidado e gerar `package-lock.json` usando a versão atual de `package.json`; não aproveitar um lockfile antigo sem validação.
 3. Confirmar `npm audit`, `npm run check`, `npm test` e `npm run build` em instalação limpa.
-4. Decidir a persistência antes de criar modelos e migrações. A proposta a avaliar está em `docs/ADR-0002-PERSISTENCE.md`.
+4. Confirmar a estratégia de persistência documentada em `docs/ADR-0002-PERSISTENCE.md`.
 5. Implementar persistência de usuários, organizações e associações com restrições de unicidade e integridade.
 6. Implementar autenticação real e autorização por organização nas rotas; testes negativos de tenant isolation são obrigatórios.
 7. Só então construir CRUD de organizações e, depois, catálogo/produtos.
@@ -71,5 +77,7 @@ Autenticação funcional, banco de dados de negócio, migrações aplicadas, org
 - Branch: https://github.com/RuiBarbosasilva/nexora-marketplace/tree/feat/core-foundation
 - Status: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/DEVELOPMENT-STATUS.md
 - Roadmap: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/ROADMAP.md
+- Notebook: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/NEXORA-NOTEBOOK.md
+- Usuários: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/CORE-USERS.md
 - Organizações: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/CORE-ORGANIZATIONS.md
 - CI: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/.github/workflows/ci.yml
