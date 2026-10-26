@@ -12,7 +12,7 @@ export interface OrganizationAccessContext {
 }
 
 /**
- * Checks membership for one organization and an optional minimum role.
+ * Checks membership for one organization and an optional allowlist of permitted roles.
  * Call only after authentication; this function does not authenticate users
  * or fetch membership from storage.
  */
