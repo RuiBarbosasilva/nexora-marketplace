@@ -14,6 +14,9 @@ Atualizado em 2026-10-26.
 - Testes de saúde, 404 e sanitização de erro adicionados.
 - GitHub Actions executa instalação, auditoria de dependências, type check, testes e build.
 
+- Schemas iniciais de organizações e papéis de membros adicionados.
+- Helper de política de acesso com testes para negar acesso cruzado entre organizações; ainda não integrado a autenticação, banco ou rotas.
+
 ## Alterações recentes
 
 - `21a2d6a`: correção de tipagem no handler de erros.
@@ -33,8 +36,9 @@ Não declarar segurança ou CI como aprovados até haver execução verde no Git
 1. Confirmar CI no commit mais recente.
 2. Gerar e versionar `package-lock.json` a partir de uma instalação limpa após atualizar a branch local.
 3. Resolver qualquer incompatibilidade de Vitest 5 ou Zod 4 revelada pela execução real.
-4. Só depois iniciar a persistência e o modelo de dados do MVP.
-5. Atualizar o notebook principal do projeto com os commits, estado e próximos passos.
+4. Definir e implementar persistência e migrações para organizações e membros.
+5. Integrar autenticação e autorização à API; o helper atual isoladamente não protege rotas.
+6. Atualizar o notebook principal do projeto com os commits, estado e próximos passos.
 
 ## Limite do produto atual
 
