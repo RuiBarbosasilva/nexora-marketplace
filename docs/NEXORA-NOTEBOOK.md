@@ -191,3 +191,11 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 - Adicionado `docs/CORE-USER-SERVICE.md` registrando o contrato e os limites.
 - **Não pronto para produção:** faltam implementação de hash com parâmetros revisados, repositório PostgreSQL/Prisma, constraint única no banco, verificação de e-mail, proteção contra abuso e fluxo de sessão/autenticação. Nenhuma rota pública de cadastro foi aberta.
 - **Validação pendente:** GitHub Actions continua retornando falha em jobs sem etapas registradas. Os testes não devem ser considerados aprovados até que o CI seja executado normalmente.
+
+## Continuidade — CI e sincronização (2026-10-26)
+
+- Publicado `docs/CI-DIAGNOSTIC.md` com evidências do CI e recuperação segura.
+- Atualizado `docs/DEVELOPMENT-STATUS.md`: a execução mais recente falhou com `steps: []` e logs não utilizáveis; causa ainda não determinada.
+- A branch remota consultada não contém `package-lock.json` nem `vitest.config.ts`. Revisar arquivos locais e diffs antes de sincronizar, sem apagar backups.
+- Não foi feita alteração de banco de dados nem criada migração nesta etapa. A configuração Prisma local reportada não está comprovadamente sincronizada com o branch remoto.
+- Próximo gate: obter execução/logs utilizáveis do CI e resolver a causa real; depois sincronizar configuração e lockfile revisados. Só então avançar para persistência real e migrações.
