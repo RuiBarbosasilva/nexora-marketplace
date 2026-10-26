@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { SecurityEventStore } from "../src/modules/sentinel/security-events.js";
 
 const requestId = "req-2026-001";
-const actorId = "2f1f6d82-7b63-4db1-a80d-9d5c8f8e9c01";
 const organizationId = "9d7d2a36-8c5c-47a7-9b12-2e3cbca4d8e2";
 
 describe("NEXORA SENTINEL security event store", () => {
