@@ -58,6 +58,13 @@ Marketplace para pequenos vendedores e fabricantes, com lojas próprias, catálo
 - `892dfda83684f4cb5b993dbc26ee862810d3508a` — proposta de autenticação.
 - `1c169edb15d641059b0f2d1e5bb87ea00a948325` — status atualizado.
 
+## Atualização de segurança — 2026-10-26
+
+- Commit `b0e3a93`: padroniza mensagens de erro 4xx/5xx para não devolver texto bruto de exceções.
+- Commit `dcae4f5`: reativa a política CSP padrão do Helmet.
+- Commit `ca919af`: adiciona teste dedicado aos cabeçalhos HTTP básicos do Helmet.
+- Validação dos commits acima ainda depende de execução confirmada no GitHub Actions ou no ambiente local.
+
 ## Pendências prioritárias
 
 1. Verificar o resultado real do GitHub Actions no branch e corrigir falhas.
