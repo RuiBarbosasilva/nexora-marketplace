@@ -65,6 +65,11 @@ Marketplace para pequenos vendedores e fabricantes, com lojas próprias, catálo
 - Commit `ca919af`: adiciona teste dedicado aos cabeçalhos HTTP básicos do Helmet.
 - Validação dos commits acima ainda depende de execução confirmada no GitHub Actions ou no ambiente local.
 
+## Continuação — validação segura
+
+- Adicionado `docs/LOCAL-VALIDATION-CHECKLIST.md` com comandos PowerShell para validar a branch local sem sobrescrever alterações e confirmar auditoria, tipos, testes e build.
+- A API e os testes de segurança foram publicados, mas a execução ainda não foi confirmada. O `package-lock.json` não foi encontrado no branch; validar dependências e lockfile continua sendo prioridade.
+
 ## Pendências prioritárias
 
 1. Verificar o resultado real do GitHub Actions no branch e corrigir falhas.
