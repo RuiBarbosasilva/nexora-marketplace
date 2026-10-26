@@ -160,3 +160,14 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 - Commit `7d90912`: adicionados testes unitários do serviço para criação, identidade inválida, payload inválido, slug duplicado e corrida de unicidade reportada pela persistência.
 - Limite explícito: ainda não há adaptador PostgreSQL/Prisma nem rota HTTP ligada a este serviço; o teste usa repositório falso e não comprova persistência real. O adaptador deve aplicar constraint UNIQUE no slug e criar organização + associação OWNER na mesma transação.
 - Validação remota pendente: os commits foram publicados diretamente na branch `feat/core-foundation`; consultar o novo resultado do GitHub Actions antes de considerar check/test/build aprovados.
+
+
+## NEXORA SENTINEL — primeira base de eventos (2026-10-26)
+
+- Criado `src/modules/sentinel/security-events.ts`: catálogo tipado de eventos de segurança, validação estrita com Zod, severidade por tipo, IDs UUID, timestamps ISO, contagem e consulta de eventos recentes.
+- O buffer é limitado (1–10.000 eventos) e remove o evento mais antigo quando atinge o limite. O contrato não aceita campos extras, evitando anexar acidentalmente senhas, tokens, corpos de requisição ou metadados livres.
+- Criado `tests/sentinel.test.ts` com testes para validação, severidade, retenção limitada, cópias defensivas, timestamp inválido e limpeza.
+- Criado `docs/SENTINEL-BASELINE.md` com escopo, limites e critérios para a próxima etapa.
+- Publicação feita na branch `feat/core-foundation`; os arquivos e testes foram enviados ao GitHub. A execução de CI deste commit ainda deve ser consultada antes de declarar os testes aprovados.
+- **Limites:** armazenamento apenas em memória; não há integração automática com handlers HTTP, autenticação, autorização ou webhooks; não há alertas externos nem auditoria persistente. Não é uma implementação pronta para produção.
+- Próxima etapa: consultar o CI e integrar eventos aos pontos reais de falha sem armazenar dados sensíveis; depois definir armazenamento append-only e acesso administrativo protegido.
