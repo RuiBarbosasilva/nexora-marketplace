@@ -132,3 +132,12 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - Testes de integração adicionados em `tests/sentinel-http.test.ts`.
 - **CI não validado:** as execuções recentes reportam falha sem passos iniciados (`steps: []`). Investigar a configuração/execução do GitHub Actions; não atribuir a falha aos testes sem logs.
 - **Pendente:** persistência durável, consulta protegida, integração de autenticação/autorização/webhooks e alertas. O buffer permanece volátil.
+
+
+## CORE — contrato de cadastro de usuário (2026-10-26)
+
+- Serviço de aplicação adicionado em `src/modules/core/user.service.ts`, com dependências `UserRepository` e `PasswordHasher` injetadas.
+- Testes unitários adicionados em `tests/user-service.test.ts`; documentação em `docs/CORE-USER-SERVICE.md`.
+- O serviço devolve apenas campos públicos e não persiste a senha bruta. O contrato depende de implementação de hash revisada e constraint única de e-mail no banco para garantir segurança sob concorrência.
+- **CI pendente:** execuções observadas continuam em `failure` com `steps: []`; não há confirmação de check, testes ou build aprovados.
+- **Próximos bloqueios de produção:** decidir e implementar persistência PostgreSQL/Prisma, configurar hash/sessões, verificação de e-mail e rate limiting antes de expor cadastro HTTP.
