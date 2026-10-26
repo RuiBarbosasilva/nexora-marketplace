@@ -59,6 +59,7 @@ Verifique a API em `http://127.0.0.1:3000/api/health`.
 - [Organizações e isolamento entre vendedores](docs/CORE-ORGANIZATIONS.md)
 - [Arquitetura](docs/ARCHITECTURE.md)
 - [Modelo de ameaças](docs/THREAT-MODEL.md)
+- [NEXORA SENTINEL — baseline inicial](docs/SENTINEL-BASELINE.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Resposta a incidentes](docs/INCIDENT-RESPONSE.md)
 - [Política de segurança](SECURITY.md)
