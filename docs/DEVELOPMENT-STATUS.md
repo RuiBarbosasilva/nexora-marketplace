@@ -141,3 +141,11 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - O serviço devolve apenas campos públicos e não persiste a senha bruta. O contrato depende de implementação de hash revisada e constraint única de e-mail no banco para garantir segurança sob concorrência.
 - **CI pendente:** execuções observadas continuam em `failure` com `steps: []`; não há confirmação de check, testes ou build aprovados.
 - **Próximos bloqueios de produção:** decidir e implementar persistência PostgreSQL/Prisma, configurar hash/sessões, verificação de e-mail e rate limiting antes de expor cadastro HTTP.
+
+## Diagnóstico do CI — 2026-10-26
+
+- Documento detalhado publicado em `docs/CI-DIAGNOSTIC.md`.
+- A execução mais recente consultada terminou em falha, mas o job não expõe etapas nem logs utilizáveis; a causa permanece indeterminada.
+- Não classificar como falha de código sem evidência e não marcar CI verde até verificar uma execução completa.
+- A branch remota não contém `package-lock.json` nem `vitest.config.ts` na leitura realizada. Revisar o estado local e o diff antes de sincronizar, sem apagar backups.
+- A persistência Prisma local relatada ainda não está comprovadamente sincronizada com a branch remota.
