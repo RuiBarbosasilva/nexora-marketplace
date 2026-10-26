@@ -12,7 +12,11 @@
 
 ## Fase 1 — MVP comercial
 - [ ] Definir modelo de dados e persistência.
-- [ ] Autenticação, perfis, organizações e autorização por organização.
+- [ ] Autenticação, sessões e perfis de usuário.
+- [x] Schemas iniciais de organização e papéis de membro (sem persistência).
+- [x] Helper de política de acesso por organização com testes de isolamento.
+- [ ] Persistência de organizações e associação de membros.
+- [ ] Autorização integrada a rotas, banco de dados e testes de isolamento ponta a ponta.
 - [ ] Cadastro de lojas e produtos.
 - [ ] Catálogo, carrinho e fluxo de pedidos.
 - [ ] Integração com provedor de pagamentos escolhido.
