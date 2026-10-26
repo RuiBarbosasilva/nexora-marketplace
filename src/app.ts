@@ -32,9 +32,12 @@ export async function createApp(): Promise<FastifyInstance> {
         ? candidateStatus
         : 500;
 
+    const isInternalError = statusCode >= 500;
     return reply.code(statusCode).send({
-      error: statusCode === 500 ? "INTERNAL_ERROR" : "REQUEST_ERROR",
-      message: statusCode === 500 ? "Erro interno do servidor" : error.message,
+      error: isInternalError ? "INTERNAL_ERROR" : "REQUEST_ERROR",
+      message: isInternalError
+        ? "Erro interno do servidor"
+        : "Não foi possível processar a requisição",
     });
   });
 
