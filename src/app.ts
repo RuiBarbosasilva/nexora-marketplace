@@ -1,4 +1,4 @@
-import Fastify, { type FastifyInstance } from "fastify";
+import Fastify, { type FastifyInstance, type FastifyError } from "fastify";
 import helmet from "@fastify/helmet";
 
 export async function createApp(): Promise<FastifyInstance> {
@@ -22,9 +22,16 @@ export async function createApp(): Promise<FastifyInstance> {
     message: "Rota não encontrada",
   }));
 
-  app.setErrorHandler((error, request, reply) => {
+  app.setErrorHandler((error: FastifyError, request, reply) => {
     request.log.error({ err: error }, "Request failed");
-    const statusCode = error.statusCode && error.statusCode >= 400 && error.statusCode < 600 ? error.statusCode : 500;
+    const candidateStatus = error.statusCode;
+    const statusCode =
+      typeof candidateStatus === "number" &&
+      candidateStatus >= 400 &&
+      candidateStatus < 600
+        ? candidateStatus
+        : 500;
+
     return reply.code(statusCode).send({
       error: statusCode === 500 ? "INTERNAL_ERROR" : "REQUEST_ERROR",
       message: statusCode === 500 ? "Erro interno do servidor" : error.message,
