@@ -105,3 +105,6 @@ export class SecurityEventStore {
     this.events.length = 0;
   }
 }
+
+/** Process-local buffer used by the HTTP error boundary; not durable audit storage. */
+export const sentinelSecurityEvents = new SecurityEventStore({ maxEvents: 1_000 });
