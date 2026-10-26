@@ -40,3 +40,16 @@ A implementação deverá acrescentar configuração validada, cliente de banco 
 3. Executar migração em banco descartável no CI.
 4. Testar slug único, associação única, chaves estrangeiras e isolamento entre organizações.
 5. Documentar backup, restauração e tratamento de falhas.
+
+
+## Nota de implementação Prisma — adicionada em 2026-10-26
+
+A implementação deve fixar uma única major do Prisma e seguir a documentação correspondente, sem combinar exemplos de versões diferentes. Se for adotado Prisma ORM 7:
+- a URL de conexão deve ser configurada no arquivo de configuração do Prisma (por exemplo, `prisma.config.ts` ou o nome que a versão instalada detectar), não copiada de exemplos da major 6;
+- o generator `prisma-client` precisa de `output` explícito;
+- o caminho de importação do cliente deve corresponder ao `output`;
+- a criação do cliente PostgreSQL deve usar o driver adapter compatível com as versões fixadas de `prisma` e `@prisma/client`.
+
+A configuração exata deve ser confirmada com a versão instalada e a documentação oficial: https://www.prisma.io/docs/guides/upgrade-prisma-orm/v7 e https://www.prisma.io/docs/orm/v7/reference/prisma-config-reference.
+
+O relato de falha da Qwen ainda não inclui a mensagem de erro, então a causa não está determinada. Antes de declarar a persistência implementada, registrar o resultado real de `prisma validate`, `prisma generate`, migrações em PostgreSQL de desenvolvimento e testes de integração. Sem banco disponível, registrar migração/testes de integração como pendentes, não aprovados.
