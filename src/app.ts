@@ -1,5 +1,6 @@
 import Fastify, { type FastifyInstance, type FastifyError } from "fastify";
 import helmet from "@fastify/helmet";
+import { sentinelSecurityEvents } from "./modules/sentinel/security-events.js";
 
 export async function createApp(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -34,6 +35,17 @@ export async function createApp(): Promise<FastifyInstance> {
         : 500;
 
     const isInternalError = statusCode >= 500;
+    try {
+      sentinelSecurityEvents.record({
+        type: isInternalError ? "UNEXPECTED_ERROR" : "INPUT_REJECTED",
+        source: "http",
+        requestId: request.id,
+      });
+    } catch (sentinelError) {
+      // Monitoring must never prevent the sanitized HTTP response.
+      request.log.error({ err: sentinelError }, "SENTINEL event recording failed");
+    }
+
     return reply.code(statusCode).send({
       error: isInternalError ? "INTERNAL_ERROR" : "REQUEST_ERROR",
       message: isInternalError
