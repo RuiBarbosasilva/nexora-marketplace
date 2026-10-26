@@ -75,3 +75,25 @@ A Qwen relata dificuldade para criar/configurar Prisma. A mensagem de erro espec
 Foi adicionado o guia `docs/PRISMA-POSTGRESQL-TROUBLESHOOTING.md` com orientações para não misturar Prisma ORM 6 e 7, alinhar as versões de CLI/Client/adapter, configurar `DATABASE_URL` sem versionar segredos, validar schema e executar migrações apenas em banco de desenvolvimento.
 
 **Próximo gate técnico:** obter a saída sanitizada do comando que falha e de `npx prisma -v`; confirmar versão e arquivos reais; executar `prisma validate` e `prisma generate`; aplicar migração e testes de integração somente quando houver PostgreSQL disponível. Não marcar persistência como concluída até haver evidências reais.
+
+## Atualização de diagnóstico PostgreSQL/Prisma — 2026-10-26
+
+Evidências informadas pelo usuário no Windows:
+- Node.js v22.23.1, npm 10.9.8, Prisma CLI e @prisma/client 6.19.3.
+- prisma generate concluiu com sucesso.
+- prisma validate falha com P1012 porque DATABASE_URL não está definida.
+- O .env local existe, mas declara somente NODE_ENV, HOST e PORT; o .env.example também não tinha DATABASE_URL.
+- PostgreSQL 18 está instalado e o serviço está ativo; localhost:5432 aceita conexão TCP.
+- Autenticação como postgres foi recusada por senha inválida; autenticação sem senha também falhou. Usuário/banco existentes ainda não foram listados.
+- prisma/migrations ainda não existe.
+- O script local de diagnóstico foi publicado em scripts/diagnose-local.ps1. Ele não imprime valores de ambiente, não cria banco e não executa migrações.
+- .env.example agora documenta uma URL PostgreSQL local de exemplo com placeholder CHANGE_ME. Essa URL é apenas modelo e não configura o .env real nem prova conectividade.
+- Não foram executadas migrações nem criados/modificados bancos durante este diagnóstico.
+
+### Próximos passos
+
+1. Confirmar credenciais locais válidas ou provisionar usuário e banco dedicados ao desenvolvimento com acesso administrativo autorizado.
+2. Configurar DATABASE_URL apenas no .env local, nunca em commits.
+3. Confirmar se o schema Prisma, dependências e infraestrutura estão versionados no branch; o cliente gerado localmente não comprova que o Prisma esteja configurado no GitHub.
+4. Executar prisma validate e prisma generate; depois criar/aplicar migração inicial somente no banco de desenvolvimento confirmado.
+5. Rodar type check, testes, build e CI e registrar resultados reais.
