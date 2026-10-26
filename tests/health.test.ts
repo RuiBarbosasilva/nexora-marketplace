@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import type { FastifyInstance } from "fastify";
 import { createApp } from "../src/app.js";
 
-describe("GET /api/health", () => {
+describe("API foundation", () => {
   let app: FastifyInstance | undefined;
 
   afterEach(async () => {
@@ -23,6 +23,25 @@ describe("GET /api/health", () => {
     app = await createApp();
     const response = await app.inject({ method: "GET", url: "/does-not-exist" });
     expect(response.statusCode).toBe(404);
-    expect(response.json().error).toBe("NOT_FOUND");
+    expect(response.json()).toEqual({
+      error: "NOT_FOUND",
+      message: "Rota não encontrada",
+    });
+  });
+
+  it("does not expose internal error details in 500 responses", async () => {
+    process.env.NODE_ENV = "test";
+    app = await createApp();
+    app.get("/__test/internal-error", async () => {
+      throw new Error("sensitive internal detail");
+    });
+
+    const response = await app.inject({ method: "GET", url: "/__test/internal-error" });
+    expect(response.statusCode).toBe(500);
+    expect(response.json()).toEqual({
+      error: "INTERNAL_ERROR",
+      message: "Erro interno do servidor",
+    });
+    expect(response.body).not.toContain("sensitive internal detail");
   });
 });
