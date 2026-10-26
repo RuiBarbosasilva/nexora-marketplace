@@ -181,3 +181,13 @@ Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lock
 - Criado `tests/sentinel-http.test.ts` para verificar que erros 4xx/5xx geram eventos e que detalhes internos continuam fora da resposta.
 - CI observado após os commits retornou `failure` com `steps: []`; não há evidência de que a execução tenha iniciado as etapas de instalação/check/test/build. A causa operacional do CI permanece por investigar. Portanto, não declarar os testes aprovados.
 - Limites permanecem: memória volátil, sem endpoint de consulta, sem persistência durável e sem integração automática de eventos de autenticação, autorização ou webhooks.
+
+
+## CORE — serviço de cadastro de usuário (2026-10-26)
+
+- Adicionado `src/modules/core/user.service.ts`, com validação de entrada, normalização de e-mail, verificação prévia de duplicidade, hash por interface injetada e resposta pública explícita.
+- O serviço não passa senha em texto puro ao repositório e não devolve `passwordHash`.
+- Adicionado `tests/user-service.test.ts` para entrada inválida, normalização, duplicidade, hash e proteção da resposta pública.
+- Adicionado `docs/CORE-USER-SERVICE.md` registrando o contrato e os limites.
+- **Não pronto para produção:** faltam implementação de hash com parâmetros revisados, repositório PostgreSQL/Prisma, constraint única no banco, verificação de e-mail, proteção contra abuso e fluxo de sessão/autenticação. Nenhuma rota pública de cadastro foi aberta.
+- **Validação pendente:** GitHub Actions continua retornando falha em jobs sem etapas registradas. Os testes não devem ser considerados aprovados até que o CI seja executado normalmente.
