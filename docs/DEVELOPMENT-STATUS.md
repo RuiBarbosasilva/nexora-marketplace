@@ -33,6 +33,11 @@ Atualizado em 2026-10-26.
 - A política CSP padrão do Helmet está habilitada.
 - Existe um teste dedicado para verificar cabeçalhos HTTP básicos; sua execução ainda precisa ser confirmada pelo CI.
 
+## Ajuste de CI
+
+- O workflow cancela execuções anteriores da mesma branch quando chega um novo commit e evita repetir a auditoria implícita durante `npm install`; a etapa explícita `npm audit --audit-level=high` continua ativa.
+- O workflow ainda usa `npm install`, pois não foi localizado `package-lock.json` versionado. Isso não substitui a necessidade de criar e revisar um lockfile para builds reprodutíveis.
+
 ## Verificações e ressalvas
 
 Os testes novos foram publicados no GitHub, mas não foram executados neste ambiente de trabalho remoto. A última execução local conhecida confirmou type check, testes e build antes das últimas mudanças de dependências e dos testes de organização. Ainda não há evidência verificada nesta sessão de CI verde para o commit mais recente.
