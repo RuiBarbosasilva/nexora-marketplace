@@ -114,3 +114,12 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - Testes unitários adicionados usando repositório falso. Eles verificam lógica de domínio, não persistência real.
 - **Ainda pendente:** adaptador PostgreSQL/Prisma, constraints/migração, rota HTTP, autenticação real e teste de integração com banco.
 - Não marcar CI como aprovado até consultar a execução gerada por estes commits.
+
+
+## NEXORA SENTINEL — baseline inicial (2026-10-26)
+
+- Publicado `src/modules/sentinel/security-events.ts` com catálogo de eventos de segurança validado, severidade inicial, timestamp/UUID e buffer em memória limitado.
+- Publicado `tests/sentinel.test.ts` cobrindo validação estrita, retenção, consulta, severidade e limpeza.
+- Publicado `docs/SENTINEL-BASELINE.md` documentando o escopo e os limites.
+- **Não confirmado:** execução dos novos testes, type check, build, auditoria e CI para o novo estado do branch.
+- **Ainda pendente:** integração com requisições reais, persistência durável, alertas e endpoints protegidos. O buffer atual é volátil e não deve ser tratado como trilha de auditoria de produção.
