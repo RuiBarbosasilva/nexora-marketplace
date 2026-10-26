@@ -106,3 +106,11 @@ Consequência: a configuração Prisma local ainda não está sincronizada com o
 O CI remoto atual executa npm install, npm audit, check, testes e build, mas não valida Prisma; o package.json remoto consultado não tem scripts de banco. O CI ainda não comprova persistência.
 
 Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário PostgreSQL postgres recusada. Nenhum banco/migração foi criado ou alterado.
+
+## Atualização — serviço de organizações (2026-10-26)
+
+- Adicionado `OrganizationService` com validação do ID do usuário autenticado, validação de entrada, detecção de slug existente e porta `OrganizationRepository`.
+- A porta exige que a implementação real crie organização e associação OWNER em transação e imponha unicidade do slug no banco.
+- Testes unitários adicionados usando repositório falso. Eles verificam lógica de domínio, não persistência real.
+- **Ainda pendente:** adaptador PostgreSQL/Prisma, constraints/migração, rota HTTP, autenticação real e teste de integração com banco.
+- Não marcar CI como aprovado até consultar a execução gerada por estes commits.
