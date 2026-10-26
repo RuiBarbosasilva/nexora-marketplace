@@ -20,7 +20,7 @@ Tipos iniciais: `AUTH_FAILURE`, `AUTH_RATE_LIMITED`, `ACCESS_DENIED`, `INPUT_REJ
 ## Limitações importantes
 
 - O buffer é volátil: reiniciar o processo apaga os eventos.
-- O módulo ainda não está conectado automaticamente aos handlers HTTP, autenticação, autorização ou webhooks.
+- O handler HTTP central registra eventos sanitizados para erros 4xx/5xx lançados por rotas. Ainda não está conectado automaticamente à autenticação, autorização ou webhooks.
 - Não existe ainda dashboard, alerta externo, retenção durável, controle de acesso de operadores ou proteção contra adulteração em armazenamento persistente.
 - A classificação de severidade é uma regra inicial e precisa de revisão operacional.
 - O módulo não substitui logs operacionais, rate limiting de borda, autenticação ou auditoria persistente.
@@ -35,4 +35,4 @@ Tipos iniciais: `AUTH_FAILURE`, `AUTH_RATE_LIMITED`, `ACCESS_DENIED`, `INPUT_REJ
 
 ## Validação
 
-Os testes automatizados do módulo estão em `tests/sentinel.test.ts`. A presença dos testes no GitHub não significa que foram executados com sucesso; consultar GitHub Actions para confirmar o resultado do commit.
+Os testes do módulo estão em `tests/sentinel.test.ts` e `tests/sentinel-http.test.ts`. A presença dos testes no GitHub não significa que foram executados com sucesso; consultar GitHub Actions para confirmar o resultado do commit. As execuções consultadas mais recentemente terminaram em falha antes de reportar qualquer passo (`steps: []`); a causa ainda não foi determinada.
