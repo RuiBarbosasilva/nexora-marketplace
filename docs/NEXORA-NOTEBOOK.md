@@ -70,6 +70,12 @@ Marketplace para pequenos vendedores e fabricantes, com lojas próprias, catálo
 - Adicionado `docs/LOCAL-VALIDATION-CHECKLIST.md` com comandos PowerShell para validar a branch local sem sobrescrever alterações e confirmar auditoria, tipos, testes e build.
 - A API e os testes de segurança foram publicados, mas a execução ainda não foi confirmada. O `package-lock.json` não foi encontrado no branch; validar dependências e lockfile continua sendo prioridade.
 
+## Prompt Master para execução assistida por Qwen
+
+- Criado `docs/PROMPT-MASTER-QWEN.md`, com instruções para auditar o repositório real, preservar mudanças locais, implementar em fases, validar dependências/CI, persistência, autenticação, isolamento multi-tenant e módulos comerciais.
+- O prompt exige resultados verificáveis e proíbe declarar testes/integrações como concluídos sem execução real.
+- Referência: branch `feat/core-foundation`; commit do prompt `940b6e62b0b6c679b9af00b36f5bfc6793d396c9`.
+
 ## Pendências prioritárias
 
 1. Verificar o resultado real do GitHub Actions no branch e corrigir falhas.
