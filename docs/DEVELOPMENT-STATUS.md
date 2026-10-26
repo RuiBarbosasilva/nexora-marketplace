@@ -123,3 +123,12 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - Publicado `docs/SENTINEL-BASELINE.md` documentando o escopo e os limites.
 - **Não confirmado:** execução dos novos testes, type check, build, auditoria e CI para o novo estado do branch.
 - **Ainda pendente:** integração com requisições reais, persistência durável, alertas e endpoints protegidos. O buffer atual é volátil e não deve ser tratado como trilha de auditoria de produção.
+
+
+## SENTINEL — integração inicial com erros HTTP (2026-10-26)
+
+- O handler global de erros agora envia sinais sanitizados ao buffer SENTINEL: 4xx -> `INPUT_REJECTED`; 5xx -> `UNEXPECTED_ERROR`.
+- O evento contém somente o tipo, a origem HTTP e o ID da requisição; não registra mensagem bruta da exceção nem corpo da requisição.
+- Testes de integração adicionados em `tests/sentinel-http.test.ts`.
+- **CI não validado:** as execuções recentes reportam falha sem passos iniciados (`steps: []`). Investigar a configuração/execução do GitHub Actions; não atribuir a falha aos testes sem logs.
+- **Pendente:** persistência durável, consulta protegida, integração de autenticação/autorização/webhooks e alertas. O buffer permanece volátil.
