@@ -14,10 +14,11 @@
 
 ## Fase 1 — MVP comercial
 - [ ] Confirmar a decisão de persistência e implementar banco/migrações.
-- [ ] Autenticação, sessões e perfis de usuário.
+- [x] Schemas iniciais de cadastro e resposta pública de usuário (sem autenticação ou persistência).
+- [ ] Implementar autenticação, sessões e perfis de usuário.
 - [x] Schemas iniciais de organização e papéis de membro (sem persistência).
 - [x] Helper de política de acesso por organização com testes de isolamento.
-- [ ] Persistência de organizações e associação de membros.
+- [ ] Persistência de usuários, organizações e associação de membros.
 - [ ] Autorização integrada a rotas, banco de dados e testes de isolamento ponta a ponta.
 - [ ] Cadastro de lojas e produtos.
 - [ ] Catálogo, carrinho e fluxo de pedidos.
