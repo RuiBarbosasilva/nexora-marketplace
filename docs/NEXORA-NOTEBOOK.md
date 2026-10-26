@@ -145,3 +145,10 @@ Referência de troubleshooting: [PRISMA-POSTGRESQL-TROUBLESHOOTING.md](./PRISMA-
 - GitHub recebeu .env.example com placeholder de conexão local (não é uma credencial válida) e scripts/diagnose-local.ps1, que verifica ambiente e executa checks sem revelar valores de .env; não cria banco nem executa migrações.
 - O cliente gerado na máquina local não significa que o schema e as dependências Prisma estejam commitados no branch remoto. A conferência do branch e a sincronização das alterações locais continuam pendentes.
 - Próximo gate: obter acesso autorizado ao PostgreSQL ou criar credenciais dedicadas de desenvolvimento; definir DATABASE_URL somente no .env local; validar o schema e confirmar dependências/arquivos no branch antes de migrar.
+## Conferência direta do branch remoto — 2026-10-26
+
+Na branch remota `feat/core-foundation`, `package.json` ainda não declara `prisma` nem `@prisma/client`; `prisma/schema.prisma`, `src/infrastructure/database/prisma.ts` e `tests/infrastructure/database.test.ts` não foram encontrados no GitHub (404). Esses caminhos foram reportados como existentes localmente. Há divergência local/remoto que deve ser reconciliada por revisão de diff e commit seguro, não por reconstrução especulativa de schema.
+
+O workflow CI atual valida auditoria, TypeScript, testes e build, mas não valida schema nem conexão de banco. O PostgreSQL local está ativo, mas `DATABASE_URL` não foi configurada e a autenticação `postgres` falhou. Não foram executadas migrações nem alterados bancos.
+
+Próxima ação: revisar e sincronizar os arquivos locais reais de Prisma e lockfile no branch, confirmar dependências alinhadas com Prisma 6.19.3, então configurar uma credencial de desenvolvimento autorizada e validar o schema antes de criar migrações.
