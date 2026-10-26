@@ -134,3 +134,14 @@ Foi criado `docs/PRISMA-POSTGRESQL-TROUBLESHOOTING.md` com uma sequência compat
 Referência de troubleshooting: [PRISMA-POSTGRESQL-TROUBLESHOOTING.md](./PRISMA-POSTGRESQL-TROUBLESHOOTING.md).
 
 **Limite:** testes locais informados pelo usuário validam a fundação atual; não comprovam Prisma funcional, migrações aplicadas, conexão PostgreSQL ou CI verde.
+
+## Atualização de execução local — PostgreSQL/Prisma (2026-10-26)
+
+- Ambiente reportado: Windows, Node.js v22.23.1, npm 10.9.8, Prisma CLI e client 6.19.3.
+- prisma generate foi concluído com sucesso na máquina local.
+- prisma validate está bloqueado porque a variável DATABASE_URL não está configurada no .env.
+- O serviço PostgreSQL 18 está ativo e a porta local 5432 responde, mas a senha fornecida para postgres foi recusada. Nenhuma senha foi redefinida.
+- Ainda não foi confirmada a lista de bancos/roles, não existe pasta prisma/migrations local segundo a verificação reportada e nenhuma migração foi executada.
+- GitHub recebeu .env.example com placeholder de conexão local (não é uma credencial válida) e scripts/diagnose-local.ps1, que verifica ambiente e executa checks sem revelar valores de .env; não cria banco nem executa migrações.
+- O cliente gerado na máquina local não significa que o schema e as dependências Prisma estejam commitados no branch remoto. A conferência do branch e a sincronização das alterações locais continuam pendentes.
+- Próximo gate: obter acesso autorizado ao PostgreSQL ou criar credenciais dedicadas de desenvolvimento; definir DATABASE_URL somente no .env local; validar o schema e confirmar dependências/arquivos no branch antes de migrar.
