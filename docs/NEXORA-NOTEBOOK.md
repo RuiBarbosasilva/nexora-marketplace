@@ -101,3 +101,36 @@ Autenticação funcional, banco de dados de negócio, migrações aplicadas, org
 - Organizações: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/CORE-ORGANIZATIONS.md
 - Autenticação: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/docs/ADR-0003-AUTHENTICATION.md
 - CI: https://github.com/RuiBarbosasilva/nexora-marketplace/blob/feat/core-foundation/.github/workflows/ci.yml
+
+
+## Atualização local e bloqueio de Prisma — 2026-10-26
+
+### Validação local informada pelo usuário
+
+A execução local em `C:\\nexora-marketplace` informou:
+- Node.js `v22.23.1`, npm `10.9.8`.
+- `npm run check`: aprovado.
+- `npm run build`: aprovado após limpar `dist`.
+- `npm test`: 1 arquivo de teste-fonte e 2 testes aprovados; Vitest configurado para não executar `dist/tests`.
+- `npm audit`: zero vulnerabilidades após atualização para Vitest `5.0.5` e Zod `4.6.7`.
+- Alterações locais pendentes reportadas: `package.json`, `vitest.config.ts`, `package-lock.json` e diretório `backups/`. Elas não devem ser consideradas sincronizadas com o repositório remoto até revisão e commit/push autorizado.
+
+### Problema de Prisma
+
+A Qwen começou a implementação, mas o usuário relata dificuldades para criar/configurar Prisma. O erro exato ainda não foi fornecido. No último exame remoto, `prisma/schema.prisma` e `prisma.config.ts` não existiam; isso descreve o estado do branch remoto consultado, não necessariamente o estado atual do computador local.
+
+Foi criado `docs/PRISMA-POSTGRESQL-TROUBLESHOOTING.md` com uma sequência compatível com a configuração do Prisma ORM 7, diagnóstico de erros comuns, critérios de validação e regras para não expor credenciais nem destruir dados.
+
+### Próxima sequência obrigatória
+
+1. No computador local, inspecionar o estado atual sem descartar mudanças: `git status --short --branch`.
+2. Capturar o erro exato do Prisma e a saída de `npx prisma -v`, `npm ls prisma @prisma/client @prisma/adapter-pg pg`, sem exibir `.env` nem a URL do banco.
+3. Conferir se `prisma`, `@prisma/client`, adapter, generator, schema e config pertencem à mesma major e seguem a documentação oficial dessa versão.
+4. Validar o schema, gerar o cliente e só executar migrações quando houver PostgreSQL de desenvolvimento acessível.
+5. Rodar check, testes, build e auditoria; registrar o resultado real.
+6. Revisar as mudanças locais e sincronizar lockfile, configuração Vitest e scripts de build no branch de trabalho somente após confirmar o diff. Não sobrescrever arquivos locais nem enviar segredos.
+7. Implementar persistência real de usuários, organizações e associações antes de avançar para lojas e catálogo.
+
+Referência de troubleshooting: [PRISMA-POSTGRESQL-TROUBLESHOOTING.md](./PRISMA-POSTGRESQL-TROUBLESHOOTING.md).
+
+**Limite:** testes locais informados pelo usuário validam a fundação atual; não comprovam Prisma funcional, migrações aplicadas, conexão PostgreSQL ou CI verde.
