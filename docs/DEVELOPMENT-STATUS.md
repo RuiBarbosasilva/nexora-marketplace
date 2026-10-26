@@ -12,7 +12,8 @@ Atualizado em 2026-10-26.
 - GitHub Actions configurado para instalar dependências, executar auditoria, type check, testes e build.
 - Schemas iniciais de organizações e papéis de membros adicionados.
 - Helper de política de acesso com testes para negar acesso cruzado entre organizações; não integrado à autenticação, banco ou rotas.
-- Notebook principal `docs/NEXORA-NOTEBOOK.md` e proposta de persistência `docs/ADR-0002-PERSISTENCE.md` publicados.
+- Schemas iniciais de cadastro e resposta pública de usuário adicionados, com testes de normalização, validação e rejeição de campos extras.
+- Notebook principal `docs/NEXORA-NOTEBOOK.md`, documentação de usuários `docs/CORE-USERS.md` e proposta de persistência `docs/ADR-0002-PERSISTENCE.md` publicados.
 
 ## Alterações recentes
 
@@ -21,12 +22,13 @@ Atualizado em 2026-10-26.
 - `e01bf4c`, `0db7893`, `2a46cc2`: schemas, helper de acesso e testes de organizações.
 - `61d00d7`: notebook principal publicado.
 - `8b5ded0`: proposta de persistência documentada.
-- `5e06880`: README atualizado com links do notebook e ADR.
-- `bc49256`: roadmap atualizado.
+- `504587d`, `512ab09`, `f9b690f`: schemas de usuário, testes e documentação.
+- `39989e7`: README atualizado.
+- `b6a1951`: roadmap atualizado.
 
 ## Verificações e ressalvas
 
-A última execução local conhecida confirmou type check, testes e build antes das últimas mudanças de dependências e dos testes de organização. Ainda não há evidência verificada nesta sessão de CI verde para o commit mais recente; a consulta disponível não retornou execuções de workflow associadas ao commit consultado.
+Os testes novos foram publicados no GitHub, mas não foram executados neste ambiente de trabalho remoto. A última execução local conhecida confirmou type check, testes e build antes das últimas mudanças de dependências e dos testes de organização. Ainda não há evidência verificada nesta sessão de CI verde para o commit mais recente.
 
 A atualização de Zod e Vitest precisa ser confirmada com instalação limpa, lockfile atualizado e auditoria da árvore resolvida. Não usar `npm audit fix --force` sem avaliar mudanças incompatíveis. Não declarar segurança, CI ou build atuais como aprovados sem logs reais.
 
