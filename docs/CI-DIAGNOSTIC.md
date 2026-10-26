@@ -27,3 +27,14 @@ Uma falha sem etapas registradas não permite atribuir a causa ao TypeScript, Vi
 ## Situação de produto
 
 A fundação HTTP, contratos/schemas de usuário e organização, serviços de domínio e baseline SENTINEL estão publicados. Persistência PostgreSQL/Prisma real, migrações, autenticação/sessões, rotas de cadastro protegidas e isolamento multi-tenant integrado continuam pendentes. Não considerar o produto pronto para produção.
+
+## Evidência adicional do job 87
+
+A consulta direta do job da execução 87 confirmou:
+- `runner_id: 0`;
+- `runner_name: ""`;
+- `labels: ["ubuntu-latest"]`;
+- `steps: []`;
+- o job foi criado e marcado como concluído em cerca de dois segundos, sem runner atribuído.
+
+Isso torna a falha anterior às etapas do workflow a hipótese mais consistente. Não é evidência de falha de TypeScript, testes, build ou auditoria. Como o runner não foi atribuído, alterar o código de aplicação não corrige a causa observada. A verificação seguinte deve ser feita nas configurações/estado do GitHub Actions do repositório e na disponibilidade de runners hospedados; essas configurações não podem ser alteradas por um commit comum no código.
