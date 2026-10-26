@@ -1,0 +1,42 @@
+# ADR-0002: Persistência de dados do marketplace
+
+- **Status:** Proposta; ainda não implementada.
+- **Data:** 2026-10-26.
+
+## Contexto
+
+NEXORA precisa persistir usuários, organizações, associação usuário-organização e, futuramente, produtos, pedidos e transações. A autorização multi-tenant exige integridade referencial e consultas que sempre limitem os dados à organização autorizada. A camada atual contém apenas schemas e um helper puro, sem banco ou autenticação.
+
+## Proposta
+
+Adotar PostgreSQL como banco relacional principal e Prisma como camada de acesso/migrações, condicionada à confirmação de ambiente de hospedagem e estratégia de backup. Usar migrações versionadas e revisadas no repositório. Não usar SQLite como banco de produção do marketplace.
+
+## Requisitos de modelagem
+
+- IDs estáveis e chaves estrangeiras para relacionamentos.
+- Unicidade de slug de organização e de associação `(organizationId, userId)`.
+- Status de associação e papel armazenados no banco; o papel nunca pode ser confiado apenas ao payload do cliente.
+- Consultas de negócio sempre filtradas pela organização validada no servidor.
+- Transações para operações que alterem múltiplas entidades relacionadas.
+- Restrições e índices coerentes com as consultas; evitar índices especulativos.
+- Valores monetários representados com tipo decimal adequado, não ponto flutuante binário.
+- Segredos e URLs de conexão apenas em variáveis de ambiente; nunca versionar `.env`.
+- Estratégia de backup/restauração e migrações testadas antes de produção.
+
+## Alternativas consideradas
+
+- **SQLite:** útil para protótipo local, mas não escolhido como destino de produção para um marketplace multiusuário.
+- **PostgreSQL com acesso SQL direto:** viável, mas exigiria padronizar manualmente consultas, mapeamento e migrações.
+- **PostgreSQL + Prisma:** proposta para reduzir inconsistência entre schema e migrações e facilitar tipagem; requer revisão de queries e segurança, não elimina riscos automaticamente.
+
+## Consequências
+
+A implementação deverá acrescentar configuração validada, cliente de banco isolado, schema inicial, migração, testes de integração com banco real e instruções de ambiente. O CI atual não comprova integração com banco. Não criar modelos de pagamentos, pedidos ou afiliados antes de estabilizar identidade, organização e associação.
+
+## Critérios para aceitar a decisão
+
+1. Confirmar disponibilidade de PostgreSQL no ambiente de deploy e custos.
+2. Fixar versões compatíveis de Prisma e driver.
+3. Executar migração em banco descartável no CI.
+4. Testar slug único, associação única, chaves estrangeiras e isolamento entre organizações.
+5. Documentar backup, restauração e tratamento de falhas.
