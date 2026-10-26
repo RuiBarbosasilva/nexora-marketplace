@@ -34,7 +34,7 @@ Ajudar pequenos vendedores e fabricantes a vender online, administrar pedidos, a
 - Vitest
 - GitHub Actions para checagem, testes e build
 
-Ver [ADR da stack](docs/ADR-0001-TECH-STACK.md).
+Ver [ADR da stack](docs/ADR-0001-TECH-STACK.md) e [proposta de persistência](docs/ADR-0002-PERSISTENCE.md).
 
 ## Executar localmente
 
@@ -53,6 +53,7 @@ Verifique a API em `http://127.0.0.1:3000/api/health`.
 
 ## Documentação
 
+- [Notebook principal do projeto](docs/NEXORA-NOTEBOOK.md)
 - [Status de desenvolvimento e validações pendentes](docs/DEVELOPMENT-STATUS.md)
 - [Organizações e isolamento entre vendedores](docs/CORE-ORGANIZATIONS.md)
 - [Arquitetura](docs/ARCHITECTURE.md)
