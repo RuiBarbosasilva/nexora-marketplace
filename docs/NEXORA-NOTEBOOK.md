@@ -209,3 +209,13 @@ A execução 87 foi inspecionada diretamente: job `validate`, `runner_id: 0`, `r
 - Commit `a8f56c6`: criado `tests/organization-access.test.ts` com cobertura para associação ausente/inativa, usuário divergente, organização divergente, allowlist de papéis e allowlist vazia.
 - Os testes foram publicados no branch `feat/core-foundation`; não foram executados nesta sessão. A execução válida depende de CI com runner atribuído ou validação local.
 - O helper continua sendo uma política pura: não substitui autenticação, consulta de associação persistida, nem autorização integrada às rotas.
+
+
+## Atualização de execução — 2026-11-04
+
+- GitHub Actions run 95: https://github.com/RuiBarbosasilva/nexora-marketplace/actions/runs/41923061991
+- Commit validado: `5e0abe3c97ea0adda0c6e41d04631477e847a778` — `fix(sentinel): cap default recent-event query to buffer size`.
+- Resultado final do pipeline: **success**. Instalação, auditoria de dependências, type check, testes e build foram concluídos com sucesso.
+- A branch agora contém `vitest.config.ts`; o arquivo `package-lock.json` ainda não está presente.
+- O pipeline verde valida somente a fundação TypeScript/Fastify/SENTINEL deste commit. Não significa que o marketplace esteja pronto nem que Prisma, PostgreSQL, autenticação ou módulos comerciais estejam implementados.
+- Próximo gate técnico: gerar e revisar o lockfile no ambiente local; em seguida sincronizar a configuração Prisma compatível com a versão efetivamente instalada, adicionar schema/migrações e validar com PostgreSQL de desenvolvimento. Não inventar URL/credenciais nem declarar migração aplicada sem banco acessível.
