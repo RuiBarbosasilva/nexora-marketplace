@@ -48,3 +48,14 @@ Isso torna a falha anterior às etapas do workflow a hipótese mais consistente.
 - `package-lock.json` segue ausente. Não mudar o workflow para `npm ci` antes de versionar um lockfile real e coerente.
 - Persistência Prisma segue fora da branch remota: não há schema, configuração, dependências ou migrações Prisma confirmadas.
 - Próximo gate: aguardar/consultar run 41922948107; se houver runner e logs, corrigir a primeira falha real. Depois sincronizar lockfile e Prisma a partir dos arquivos locais revisados, sem sobrescrever alterações ou backups.
+
+
+## Resultado confirmado — 2026-11-04
+
+- Execução GitHub Actions: [run 95](https://github.com/RuiBarbosasilva/nexora-marketplace/actions/runs/41923061991).
+- Commit validado: `5e0abe3c97ea0adda0c6e41d04631477e847a778` (`fix(sentinel): cap default recent-event query to buffer size`).
+- Resultado final: **success**.
+- Etapas observadas como concluídas com sucesso: instalação de dependências, auditoria de dependências, TypeScript check, testes e build.
+- O job `validate` recebeu runner e executou as etapas; portanto, a falha anterior por ausência de runner não se reproduziu nesta execução.
+- A validação comprova o estado do código neste commit; não comprova persistência Prisma/PostgreSQL, pois schema, configuração, dependências e migrações Prisma continuam ausentes da branch.
+- `vitest.config.ts` está versionado. `package-lock.json` continua ausente; o workflow permanece em `npm install`, sem trocar para `npm ci` até existir lockfile revisado.
