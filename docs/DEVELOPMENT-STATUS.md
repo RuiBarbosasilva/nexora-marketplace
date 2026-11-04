@@ -160,3 +160,13 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - CI do novo commit `4954949` foi enfileirado (run 41922948107); ainda sem resultado no momento deste registro.
 - A última execução anterior (run 40394911338, commit `b59876e`) falhou antes de iniciar etapas: job sem runner atribuído (`runner_id: 0`, `runner_name` vazio, `steps: []`). Isso não demonstra falha do código; é uma falha de alocação/execução do runner.
 - Não declarar build, testes, auditoria, Prisma ou persistência aprovados até obter evidência executável no CI e PostgreSQL de desenvolvimento.
+
+
+## Validação remota confirmada — 2026-11-04
+
+- GitHub Actions run 95: https://github.com/RuiBarbosasilva/nexora-marketplace/actions/runs/41923061991
+- Commit validado: `5e0abe3c97ea0adda0c6e41d04631477e847a778`.
+- Resultado: **success** em instalação, auditoria npm, type check, testes e build.
+- `vitest.config.ts` está presente na branch e limita a descoberta a `tests/**/*.test.ts`, excluindo dependências, build e backups.
+- `package-lock.json` ainda não está versionado. O CI usa `npm install`; builds reprodutíveis com `npm ci` permanecem pendentes até gerar e revisar o lockfile no ambiente de desenvolvimento.
+- Prisma/PostgreSQL ainda não está implementado nesta branch: não há `prisma/schema.prisma`, configuração Prisma, dependências Prisma nem migrações. A execução verde não valida persistência.
