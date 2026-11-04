@@ -149,3 +149,14 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - Não classificar como falha de código sem evidência e não marcar CI verde até verificar uma execução completa.
 - A branch remota não contém `package-lock.json` nem `vitest.config.ts` na leitura realizada. Revisar o estado local e o diff antes de sincronizar, sem apagar backups.
 - A persistência Prisma local relatada ainda não está comprovadamente sincronizada com a branch remota.
+
+
+## Retomada remota — 2026-11-04
+
+- Acesso ao repositório privado confirmado na conta proprietária; branch ativa: `feat/core-foundation`.
+- Adicionado `vitest.config.ts` no commit `4954949`, restringindo descoberta a `tests/**/*.test.ts` e excluindo `dist/**`, `backups/**` e `node_modules/**`.
+- `package-lock.json` continua ausente no branch remoto. Não foi fabricado manualmente: deve ser gerado/revisado com npm a partir da árvore real de dependências e sincronizado junto do package.json.
+- `prisma/schema.prisma`, `prisma.config.ts`, dependências Prisma e adaptador PostgreSQL continuam ausentes no branch remoto. A configuração local relatada não pode ser reconstruída com segurança sem o diff/arquivos locais.
+- CI do novo commit `4954949` foi enfileirado (run 41922948107); ainda sem resultado no momento deste registro.
+- A última execução anterior (run 40394911338, commit `b59876e`) falhou antes de iniciar etapas: job sem runner atribuído (`runner_id: 0`, `runner_name` vazio, `steps: []`). Isso não demonstra falha do código; é uma falha de alocação/execução do runner.
+- Não declarar build, testes, auditoria, Prisma ou persistência aprovados até obter evidência executável no CI e PostgreSQL de desenvolvimento.
