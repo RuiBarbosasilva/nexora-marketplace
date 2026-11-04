@@ -219,3 +219,14 @@ A execução 87 foi inspecionada diretamente: job `validate`, `runner_id: 0`, `r
 - A branch agora contém `vitest.config.ts`; o arquivo `package-lock.json` ainda não está presente.
 - O pipeline verde valida somente a fundação TypeScript/Fastify/SENTINEL deste commit. Não significa que o marketplace esteja pronto nem que Prisma, PostgreSQL, autenticação ou módulos comerciais estejam implementados.
 - Próximo gate técnico: gerar e revisar o lockfile no ambiente local; em seguida sincronizar a configuração Prisma compatível com a versão efetivamente instalada, adicionar schema/migrações e validar com PostgreSQL de desenvolvimento. Não inventar URL/credenciais nem declarar migração aplicada sem banco acessível.
+
+
+## Continuidade — PostgreSQL e Prisma (2026-11-04)
+
+Foi criada a branch isolada `feat/postgres-prisma-core`, baseada na fundação aprovada `feat/core-foundation`, para implementar a primeira camada de persistência sem alterar a branch base.
+
+Arquivos adicionados/alterados: `package.json` (Prisma ORM 7.10.1, adapter PostgreSQL e scripts), `prisma/schema.prisma`, `prisma.config.ts`, `src/db/prisma.ts`, migração SQL inicial e CI para gerar/validar Prisma.
+
+Modelos: User, Organization e OrganizationMembership. Constraints: e-mail único, slug único, associação única por organização/usuário, índices de status e FKs com exclusão em cascata para associação.
+
+Atenção: migration ainda não aplicada; banco PostgreSQL real não foi conectado; persistência ainda não foi integrada aos serviços; autenticação continua fora do escopo desta entrega. A execução CI da nova branch é o próximo gate obrigatório. Não afirmar que a camada está operacional até CI verde e testes de integração em PostgreSQL real.
