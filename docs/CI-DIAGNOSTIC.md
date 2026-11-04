@@ -38,3 +38,13 @@ A consulta direta do job da execução 87 confirmou:
 - o job foi criado e marcado como concluído em cerca de dois segundos, sem runner atribuído.
 
 Isso torna a falha anterior às etapas do workflow a hipótese mais consistente. Não é evidência de falha de TypeScript, testes, build ou auditoria. Como o runner não foi atribuído, alterar o código de aplicação não corrige a causa observada. A verificação seguinte deve ser feita nas configurações/estado do GitHub Actions do repositório e na disponibilidade de runners hospedados; essas configurações não podem ser alteradas por um commit comum no código.
+
+
+## Retomada e nova execução — 2026-11-04
+
+- A branch remota agora contém `vitest.config.ts` (commit `4954949571a618f98a45653adb9ee3e9961d63a1`), com descoberta limitada a `tests/**/*.test.ts` e exclusão de `dist/**`, `backups/**` e `node_modules/**`.
+- Nova execução CI 41922948107 foi criada para esse commit e estava `queued` na consulta; resultado ainda não disponível.
+- A execução anterior 40394911338 (run 91) terminou em falha com `runner_id: 0`, `runner_name: ""` e `steps: []`. A evidência aponta para falha anterior à execução das etapas, não para erro identificado no código.
+- `package-lock.json` segue ausente. Não mudar o workflow para `npm ci` antes de versionar um lockfile real e coerente.
+- Persistência Prisma segue fora da branch remota: não há schema, configuração, dependências ou migrações Prisma confirmadas.
+- Próximo gate: aguardar/consultar run 41922948107; se houver runner e logs, corrigir a primeira falha real. Depois sincronizar lockfile e Prisma a partir dos arquivos locais revisados, sem sobrescrever alterações ou backups.
