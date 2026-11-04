@@ -53,3 +53,17 @@ A implementação deve fixar uma única major do Prisma e seguir a documentaçã
 A configuração exata deve ser confirmada com a versão instalada e a documentação oficial: https://www.prisma.io/docs/guides/upgrade-prisma-orm/v7 e https://www.prisma.io/docs/orm/v7/reference/prisma-config-reference.
 
 O relato de falha da Qwen ainda não inclui a mensagem de erro, então a causa não está determinada. Antes de declarar a persistência implementada, registrar o resultado real de `prisma validate`, `prisma generate`, migrações em PostgreSQL de desenvolvimento e testes de integração. Sem banco disponível, registrar migração/testes de integração como pendentes, não aprovados.
+
+
+## Implementação inicial no repositório — 2026-11-04
+
+A branch `feat/postgres-prisma-core` introduz uma primeira implementação versionada:
+
+- Prisma ORM 7.10.1, PostgreSQL e driver adapter `@prisma/adapter-pg` 7.10.1.
+- `prisma/schema.prisma` com usuários, organizações e associações, incluindo unicidade de e-mail, slug e associação usuário-organização.
+- Migração SQL inicial em `prisma/migrations/20261104000100_core_identity` e `migration_lock.toml`.
+- `prisma.config.ts` com fallback local apenas para validação/geração sem banco; operações de migração continuam exigindo uma conexão real.
+- Cliente singleton em `src/db/prisma.ts`, que falha explicitamente quando `DATABASE_URL` não está definida.
+- Scripts de geração, validação e migração e etapas de geração/validação no CI.
+
+**Limites não aprovados como concluídos:** a migração ainda não foi aplicada em PostgreSQL real; não há teste de integração com banco; o cliente ainda não foi conectado aos serviços de cadastro/organização; não há autenticação nem sessão. O CI desta branch precisa aprovar geração, validação, type check, testes e build antes de considerar a base compilável. Não executar `migrate dev` contra dados existentes sem backup e confirmação explícita.
