@@ -89,11 +89,12 @@ export class SecurityEventStore {
     return { ...event };
   }
 
-  listRecent(limit = 50): SecurityEvent[] {
-    if (!Number.isInteger(limit) || limit < 1 || limit > this.maxEvents) {
+  listRecent(limit?: number): SecurityEvent[] {
+    const resolvedLimit = limit ?? Math.min(50, this.maxEvents);
+    if (!Number.isInteger(resolvedLimit) || resolvedLimit < 1 || resolvedLimit > this.maxEvents) {
       throw new RangeError(`limit must be an integer between 1 and ${this.maxEvents}`);
     }
-    return this.events.slice(-limit).reverse().map((event) => ({ ...event }));
+    return this.events.slice(-resolvedLimit).reverse().map((event) => ({ ...event }));
   }
 
   count(type?: SecurityEventType): number {
