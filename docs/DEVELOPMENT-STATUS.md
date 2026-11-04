@@ -170,3 +170,12 @@ Bloqueio local continua: DATABASE_URL ausente no .env e credencial do usuário P
 - `vitest.config.ts` está presente na branch e limita a descoberta a `tests/**/*.test.ts`, excluindo dependências, build e backups.
 - `package-lock.json` ainda não está versionado. O CI usa `npm install`; builds reprodutíveis com `npm ci` permanecem pendentes até gerar e revisar o lockfile no ambiente de desenvolvimento.
 - Prisma/PostgreSQL ainda não está implementado nesta branch: não há `prisma/schema.prisma`, configuração Prisma, dependências Prisma nem migrações. A execução verde não valida persistência.
+
+
+## PostgreSQL/Prisma — implementação inicial em branch de trabalho (2026-11-04)
+
+Branch: `feat/postgres-prisma-core`.
+
+Implementado no código versionado: Prisma ORM 7.10.1 + PostgreSQL adapter; schema de User, Organization e OrganizationMembership; constraints únicas e chaves estrangeiras; migração SQL inicial; Prisma config; cliente singleton; scripts db; CI gera e valida o Prisma Client/schema.
+
+Não declarar persistência operacional ainda: não foi comprovada conexão com PostgreSQL, a migração não foi aplicada em banco real, não existem testes de integração de persistência e os serviços de domínio ainda usam portas/interfaces sem adapter Prisma conectado. A branch deve passar no CI antes de merge. O arquivo `package-lock.json` segue ausente; CI ainda usa `npm install`.
